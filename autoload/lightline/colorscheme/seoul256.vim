@@ -22,14 +22,31 @@ let s:cyan = [ '#87d7d7', 23 ]
 let s:green = [ '#87af87', 108 ]
 let s:white = [ '#d0d0d0', 252 ]
 
+
+if &background == 'light'
+    let s:base02 = [ '#fdf6e3', '231']
+endif
+
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
-let s:p.normal.left = [ [ s:base02, s:blue ], [ s:base3, s:base01 ] ]
-let s:p.normal.right = [ [ s:base02, s:base1 ], [ s:base2, s:base01 ] ]
-let s:p.inactive.right = [ [ s:base02, s:base00 ], [ s:base0, s:base02 ] ]
+if &background == 'light'
+    let s:p.normal.left = [ [ s:base02, s:blue ], [ s:blue, s:base02 ] ]
+    let s:p.normal.right = [ [ s:base0, s:base02 ], [ s:base0, s:base02 ] ]
+    let s:p.normal.warning = [ [ s:yellow, s:base02 ] ]
+    let s:p.insert.left = [ [ s:base02, s:green ], [ s:green, s:base02 ] ]
+    let s:p.replace.left = [ [ s:base02, s:magenta ], [ s:magenta, s:base02 ] ]
+    let s:p.visual.left = [ [ s:base02, s:peach ], [ s:peach, s:base02 ] ]
+    let s:p.inactive.right = [ [ s:base0, s:base02 ], [ s:base0, s:base02 ] ]
+else
+    let s:p.normal.left = [ [ s:base02, s:blue ], [ s:base3, s:base01 ] ]
+    let s:p.normal.right = [ [ s:base02, s:base1 ], [ s:base2, s:base01 ] ]
+    let s:p.normal.warning = [ [ s:yellow, s:base01 ] ]
+    let s:p.insert.left = [ [ s:base02, s:green ], [ s:green, s:base01 ] ]
+    let s:p.replace.left = [ [ s:base02, s:magenta ], [ s:base3, s:base01 ] ]
+    let s:p.visual.left = [ [ s:base02, s:peach ], [ s:base3, s:base01 ] ]
+    let s:p.inactive.right = [ [ s:base02, s:base00 ], [ s:base0, s:base02 ] ]
+endif
+
 let s:p.inactive.left =  [ [ s:base0, s:base02 ], [ s:base00, s:base02 ] ]
-let s:p.insert.left = [ [ s:base02, s:green ], [ s:base3, s:base01 ] ]
-let s:p.replace.left = [ [ s:base02, s:magenta ], [ s:base3, s:base01 ] ]
-let s:p.visual.left = [ [ s:base02, s:peach ], [ s:base3, s:base01 ] ]
 let s:p.normal.middle = [ [ s:base0, s:base02 ] ]
 let s:p.inactive.middle = [ [ s:base00, s:base02 ] ]
 let s:p.tabline.left = [ [ s:base3, s:base00 ] ]
@@ -37,6 +54,5 @@ let s:p.tabline.tabsel = [ [ s:base3, s:base02 ] ]
 let s:p.tabline.middle = [ [ s:base01, s:base1 ] ]
 let s:p.tabline.right = copy(s:p.normal.right)
 let s:p.normal.error = [ [ s:red, s:base02 ] ]
-let s:p.normal.warning = [ [ s:yellow, s:base01 ] ]
 
 let g:lightline#colorscheme#seoul256#palette = lightline#colorscheme#flatten(s:p)
